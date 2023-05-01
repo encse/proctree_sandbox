@@ -64,7 +64,7 @@ func (c *ChildWriter) Write(p []byte) (n int, err error) {
 	c.stack.cond.L.Lock()
 	defer c.stack.cond.L.Unlock()
 	if c.closed {
-		return 0, io.EOF
+		return 0, io.ErrClosedPipe
 	}
 	return c.stack.wr.Write(p)
 }
